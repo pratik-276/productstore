@@ -73,11 +73,8 @@ def addProduct(req):
 
         try:
             product = Product(name=name, link=image_file, description=description)
-            print('Created')
             product.save()
-            return JsonResponse({
-                "message": "Product creation success"
-            })
+            return redirect('/products')
         except:
             return JsonResponse({
                 "message": "Product creation failed"
