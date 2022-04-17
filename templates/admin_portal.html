@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Portal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        * {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: Raleway, sans-serif;
+}
+body {
+	background: linear-gradient(90deg, #C7C5F4, #776BCC);
+}
+
+.button__icon {
+	font-size: 24px;
+	margin-left: auto;
+	color: #7875B5;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+}
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+                <h3><b>Products</b></h3>
+
+                <ol type="1">
+                    <li><img src="img_product/1.jpg" alt="1" width="300" height="400"></li><br>
+                    <li><img src="img_product/2.jpg" alt="2" width="300" height="400"></li><br>
+                    <li><img src="img_product/3.jpg" alt="3" width="300" height="400"></li><br>
+                    <li><img src="img_product/4.jpg" alt="4" width="300" height="400"></li><br>
+                </ol>
+
+                <form action="upload" method="post" >
+                    <br>
+                    <h3><b>New Products</b></h3><br>
+
+                  <input type="file" name="fileToUpload" id="fileToUpload">
+                   <br><br>
+                  <input type="submit" value="Upload Image" name="submit">
+                </form>
+
+</div>
+
+</html>
