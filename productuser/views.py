@@ -12,37 +12,44 @@ def authpage(request):
 
 @csrf_exempt
 def signup(req):
-    email = req.POST.get('email')
-    password = req.POST.get('password')
+    if req.method == "POST":
+        email = req.POST.get('email')
+        password = req.POST.get('password')
 
-    try:
-        user = ProductUser(email=email, password=password)
-        user.save()
-        return JsonResponse({
-            "message": "User creation success"
-        })
-    except:
-        return JsonResponse({
-            "message": "User creation failed"
-        })
+        try:
+            user = ProductUser.objects.get(email=email)
+            return render(req, 'signup.html', {
+                "message": "Email already exists. Please login"
+            })
+        except:
+            pass
+
+        try:
+            user = ProductUser(email=email, password=password)
+            user.save()
+            return JsonResponse({
+                "message": "User creation success"
+            })
+        except:
+            return render(req, 'signup.html', {'message': "User creation failed"})
+    elif req.method == "GET":
+        return render(req, 'signup.html')
 
 
 @csrf_exempt
 def login(req):
-    email = req.POST.get('email')
-    password = req.POST.get('password')
+    if req.method == "POST":
+        email = req.POST.get('email')
+        password = req.POST.get('password')
 
-    try:
-        user = ProductUser.objects.get(email=email)
-        if user.password != password:
+        try:
+            user = ProductUser.objects.get(email=email)
+            if user.password != password:
+                return render(req, 'login.html', {'message': 'Password incorrect'})
             return JsonResponse({
-                "message": "Wrong password entered"
+                "message": "Login Success"
             })
-        return JsonResponse({
-            "message": "Login Success"
-        })
-    except:
-        print("User does not exist")
-        return JsonResponse({
-            "message": "User does not exist"
-        })
+        except:
+            return render(req, 'login.html', {'message': "User does not exist"})
+    elif req.method == "GET":
+        return render(req, 'login.html')
