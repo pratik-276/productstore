@@ -34,8 +34,13 @@ def login(req):
 
     try:
         user = ProductUser.objects.get(email=email)
-        print(user.password)
-        return render(req, 'login.html')
+        if user.password != password:
+            return JsonResponse({
+                "message": "Wrong password entered"
+            })
+        return JsonResponse({
+            "message": "Login Success"
+        })
     except:
         print("User does not exist")
         return JsonResponse({
