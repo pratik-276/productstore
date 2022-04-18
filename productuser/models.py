@@ -21,3 +21,21 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Own(models.Model):
+    userid = models.IntegerField()
+    productid = models.IntegerField()
+    count = models.IntegerField()
+
+    def __str__(self):
+        return self.userid
+
+
+class Transaction(models.Model):
+    userid = models.IntegerField()
+    productid = models.IntegerField()
+    status = models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.userid

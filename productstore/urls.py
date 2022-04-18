@@ -11,7 +11,8 @@ urlpatterns = [
     path('signup', views.signup),
     path('productadd', views.addProduct),
     path('products', views.getproducts),
-    path('add-product', views.addProduct)
+    path('add-product', views.addProduct),
+    path('transaction', views.addtransaction)
 ]
 
 if settings.DEBUG:

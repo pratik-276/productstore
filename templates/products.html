@@ -15,22 +15,37 @@
       </div>
     <div class="d-flex flex-row flex-wrap">
         {% for product in products %}
-            <div class="d-flex flex-column justify-content-between border rounded mx-auto my-2 pb-1"
-                 style="height: 380px; width: 320px;">
+            <div class="d-flex flex-column justify-content-between border rounded pb-1"
+                 style="height: 380px; width: 320px;margin: 10px 25px;">
+<!--                <span class="bg-white p-1 mb-0 text-center ml-auto"-->
+<!--                   style="border-radius: 50%; position: relative; z-index: 2; width: 30px; height: 30px; bottom: 10px">-->
+<!--                    {{product.count}}-->
+<!--                </span>-->
                 <div>
                     <img src="/media/{{product.link}}" class="w-100" style="height: 170px;" />
                     <div class="p-3" style="height: 160px; overflow: hidden;">
                         <h4 class="mt-1">{{product.name}}</h4>
                         <p class="mt-2">{{product.description}}</p>
+                        <p class="mt-2">Count: {{product.count}}</p>
                     </div>
                 </div>
-                <div class="d-flex px-1">
-                    <button class="btn btn-primary w-50 mx-1">Buy</button>
-                    <button class="btn btn-danger w-50 mx-1">Sell</button>
+                <div class="d-flex justify-content-center px-1">
+                    <button class="btn btn-primary w-50 mx-1" onclick="transact({{product.id}}, 'buy')">Buy</button>
+                    {% if product.count > 0 %}
+                        <button class="btn btn-danger w-50 mx-1" onclick="transact({{product.id}}, 'sell')">Sell</button>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
     </div>
   </div>
+<script>
+    function transact(productid, status){
+        const params = new URLSearchParams(document.location.search);
+        const userid = params.get("userid");
+        console.log(userid, productid, status);
+        window.location.replace("http://127.0.0.1:8000/transaction?uid="+userid+"&pid="+productid+"&status="+status);
+    }
+</script>
 </body>
 </html>
