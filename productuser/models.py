@@ -36,6 +36,7 @@ class Transaction(models.Model):
     userid = models.IntegerField()
     productid = models.IntegerField()
     status = models.CharField(max_length=15)
+    
 
     def __str__(self):
         return self.userid
